@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Selamat Ulang Tahun!</title>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fbf1e3; --paper:#fdf6ea; --pink:#e8a3a8; --pink-soft:#f6cfd0; --rose:#b85a65; --brown:#7a4a4f; --gold:#e9b949; --grid:rgba(200,150,150,.15);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+:root[data-theme="dark"]{--cream:#2b1f22;--paper:#382a2e;--pink:#d98a92;--pink-soft:#6b3f47;--rose:#f0a7b0;--brown:#f1d6d6;--grid:rgba(255,200,200,.07)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--cream:#2b1f22;--paper:#382a2e;--pink:#d98a92;--pink-soft:#6b3f47;--rose:#f0a7b0;--brown:#f1d6d6;--grid:rgba(255,200,200,.07)}
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; min-height:100vh; color:var(--brown); font-family:'Patrick Hand','Gaegu',cursive; background-color:var(--cream);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px; display:flex; flex-direction:column; align-items:center; overflow-x:hidden;
+}
+.gingham{position:fixed;left:0;right:0;height:46px;z-index:0;opacity:.85;
+  background-image:linear-gradient(90deg,rgba(232,163,168,.55) 50%,transparent 50%),linear-gradient(rgba(232,163,168,.55) 50%,transparent 50%);
+  background-size:26px 26px;}
+.gingham.top{top:0}.gingham.bottom{bottom:0}
+.bar{position:relative;z-index:2;margin:18px 16px 0;width:calc(100% - 32px);max-width:880px;background:var(--paper);border-radius:22px;padding:10px 20px;display:flex;align-items:center;gap:10px;font-size:1.2rem;box-shadow:0 2px 0 var(--pink-soft)}
+.bar span.sp{margin-left:auto}
+main{position:relative;z-index:1;flex:1;width:100%;max-width:880px;padding:34px 16px 90px;display:flex;flex-direction:column;align-items:center}
+.stage{position:relative;width:100%;display:flex;justify-content:center}
+.deco{position:absolute;font-size:3.4rem;filter:drop-shadow(0 0 0 #fff);user-select:none}
+.deco.bow{left:0;top:6%;transform:rotate(-12deg)}
+.deco.cake{left:2%;bottom:6%;transform:rotate(-8deg);background:var(--paper);padding:14px 16px 26px;border-radius:6px;box-shadow:0 3px 8px rgba(120,70,80,.18)}
+.deco.balloon{right:0;top:2%;transform:rotate(8deg)}
+.deco.gift{right:2%;bottom:4%;transform:rotate(10deg)}
+.note{position:relative;width:min(100%,520px);background:var(--paper);padding:56px 30px 34px;text-align:center;border-radius:4px 4px 10px 10px;box-shadow:0 4px 14px rgba(120,70,80,.18);margin:0 auto}
+.note::before{content:"";position:absolute;top:10px;left:18px;right:18px;height:10px;background:radial-gradient(circle,var(--cream) 4px,transparent 5px) 0 0/22px 10px repeat-x}
+.tape{position:absolute;top:-16px;left:50%;width:120px;height:34px;transform:translateX(-50%) rotate(-1deg);background:repeating-linear-gradient(45deg,var(--pink-soft) 0 8px,var(--pink) 8px 16px);opacity:.85}
+.crown{font-size:2.2rem;position:absolute;left:28px;top:44px;transform:rotate(-14deg)}
+h1{font-family:'Gaegu',cursive;font-weight:700;font-size:clamp(3rem,13vw,5rem);line-height:.95;margin:8px 0 6px;color:var(--rose)}
+.line{width:60%;height:4px;margin:6px auto 18px;border-radius:4px;background:var(--pink)}
+#to{font-size:1.5rem;margin:0 0 4px}
+.msg{font-size:1.35rem;line-height:1.45;margin:0 0 12px;min-height:3em}
+.btn{font-family:inherit;font-size:1.3rem;color:var(--rose);background:var(--pink-soft);border:3px solid var(--paper);outline:2px dashed var(--pink);outline-offset:-9px;padding:14px 34px;border-radius:40px;cursor:pointer;margin-top:30px;box-shadow:0 3px 0 var(--pink);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(2px)}
+.btn:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.surprise{display:none;margin-top:10px;width:min(100%,520px);background:var(--paper);border-radius:14px;padding:26px;text-align:center;box-shadow:0 4px 14px rgba(120,70,80,.18);font-size:1.4rem;line-height:1.5}
+.surprise.show{display:block;animation:pop .5s ease}
+.surprise .big{font-size:3rem;display:block}
+@keyframes pop{from{transform:scale(.85) rotate(-2deg);opacity:0}to{transform:none;opacity:1}}
+.confetti{position:fixed;top:-20px;z-index:5;pointer-events:none;font-size:1.6rem;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+@media (max-width:720px){
+  .deco{font-size:2.4rem}.deco.cake{display:none}.deco.gift{bottom:-6%}.deco.balloon{top:-4%}.deco.bow{top:-4%}
+  .note{padding:56px 18px 28px}.crown{left:16px}
+}
+@media (prefers-reduced-motion:reduce){.surprise.show{animation:none}.confetti{display:none}}
+</style>
+</head>
+<body>
+<div class="gingham top"></div><div class="gingham bottom"></div>
+<header class="bar"><span>🎁</span><span>Happy Birthday! 💗</span><span class="sp">🏠 | 🤍</span></header>
+<main>
+  <div class="stage" id="p1">
+    <span class="deco bow">🎀</span>
+    <span class="deco cake">🎂</span>
+    <span class="deco balloon">🎈🎈</span>
+    <span class="deco gift">🎁</span>
+    <section class="note">
+      <div class="tape"></div><span class="crown">👑</span>
+      <h1>Happy<br>Birthday!</h1>
+      <div class="line"></div>
+      <p id="to"></p>
+      <p class="msg">Semoga kamu selalu diberi kebahagiaan, kesehatan, dan kesuksesan!</p>
+      <p>— 💗 —</p>
+      <button class="btn" id="go" type="button">Ketuk untuk lihat kejutanmu!</button>
+    </section>
+  </div>
+  <section class="surprise" id="sur" aria-live="polite">
+    <span class="big">🎂✨</span>
+    haii iaaa, aku mo bilangg maaciw banyakk buat semuanyaa, maaciww udaa slalu jadi adee skaligus teteh yang ter thebest buat aingg, gatau mau bilang apaaa, tapii maap aing sering ngrepotin kamu, nyuruu sgala macemm,apalagii kalo aing lagi hilang arah pastii larinya ke kamuu, hehehe. slamatt nginjek fase beratt inii, - kalo kata 3726 mdpl, Selamat berproses menjadi lebih baik, Semoga diujung prosesnya nanti, sesuatu yang indah itu berpihak ke kamu iaaa, dan akan slalu berpihak ke kamu. - 3726 mdpl   <br><button class="btn" type="button" onclick="document.getElementById('sur').classList.remove('show');document.getElementById('p1').style.display='';window.scrollTo(0,0)">← Kembali</button>
+  </section>
+</main>
+<script>
+(function(){
+  var name="";
+  try{name=decodeURIComponent((location.hash||"").replace("#",""))}catch(e){}
+  var to=document.getElementById("to");
+  if(name&&/^[\w\- ]{1,30}$/.test(name)){to.textContent="Untuk "+name+" 💗"}else{to.style.display="none"}
+  document.getElementById("go").addEventListener("click",function(){
+    var s=document.getElementById("sur");document.getElementById("p1").style.display="none";s.classList.add("show");window.scrollTo(0,0);
+    if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+    var e=["💗","🎀","✨","🎈","🌸"];
+    for(var i=0;i<30;i++){var c=document.createElement("span");c.className="confetti";c.textContent=e[i%e.length];
+      c.style.left=Math.random()*100+"vw";c.style.animationDuration=(2.5+Math.random()*2.5)+"s";c.style.animationDelay=(Math.random()*.8)+"s";
+      document.body.appendChild(c);setTimeout(function(x){x.remove()},6500,c);}
+  });
+})();
+</script>
+</body>
+</html>
